@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     this.store.pipe(select('maskUserName'))
     .subscribe(
-      username=>{if(username){this.maskUserName = username.maskUserName}}
+      username=>{this.maskUserName = username.maskUserName}
     )
   }
 
