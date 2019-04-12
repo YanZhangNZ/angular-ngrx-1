@@ -8,7 +8,7 @@ import { LoginComponent } from './login.component';
 
 //from course
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './state/userName.reducer';
+import { reducer } from './state/user.reducer';
 
 const userRoutes: Routes = [
   { path: 'login', component: LoginComponent }
@@ -18,7 +18,7 @@ const userRoutes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(userRoutes),
-    StoreModule.forFeature('maskUserName',reducer)
+    StoreModule.forFeature('user',reducer)
   ],
   declarations: [
     LoginComponent
