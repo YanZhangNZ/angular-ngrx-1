@@ -12,12 +12,14 @@ export interface ProductState{
     showProductCode:boolean;
     currentProduct:Product;
     products:Product[];
+    error:string;
 }
 
 const initialState: ProductState = {
     showProductCode:true,
     currentProduct:null,
-    products:[]
+    products:[],
+    error:''
 }
 
 
@@ -38,6 +40,10 @@ export const getProducts = createSelector(
     state => state.products
 );
 
+export const getError = createSelector(
+    getProductFeatureState,
+    state=> state.error
+)
 //define state and param with ProductState type; change hard code with strongly typed actions
 export function reducer(state=initialState,action:ProductActions):ProductState{
     switch(action.type){
@@ -68,7 +74,18 @@ export function reducer(state=initialState,action:ProductActions):ProductState{
                     starRating:0
                 }
             }
-            
+        case ProductActionTypes.LoadSuccess:
+            return{
+                ...state,
+                products:action.payload,
+                error:''
+            }
+        case ProductActionTypes.LoadFail:
+            return {
+                ...state,
+                products:[],
+                error:action.payload
+            }
         default:
             return state
     }
